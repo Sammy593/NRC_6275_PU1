@@ -6,9 +6,27 @@ body {
     color: #5a5a5a;
     height: 100%;
     position: relative;
-    padding-bottom: 13em;
+    padding-bottom: 14em;
     min-height: 100vh;
   }
+
+body::-webkit-scrollbar,
+  #container_canciones::-webkit-scrollbar
+   {
+      width: 15px;               /* width of the entire scrollbar */
+}
+    
+body::-webkit-scrollbar-track,
+    #container_canciones::-webkit-scrollbar-track {
+      background: rgb(0, 0, 0);        /* color of the tracking area */
+}
+    
+body::-webkit-scrollbar-thumb,
+    #container_canciones::-webkit-scrollbar-thumb{
+      background: rgb(1, 175, 175);   /* color of the scroll thumb */
+      border-radius: 20px;       /* roundness of the scroll thumb */
+      border: 3px solid rgb(68, 68, 68);  /* creates padding around scroll thumb */
+}
   
   nav{
     background-color: black;
@@ -66,7 +84,7 @@ main{
 }
 
 .title_top{
-  color: rgb(82, 81, 81);
+  color: rgb(128, 128, 128);
   margin-bottom: 30px;
 }
 .text_section1{
