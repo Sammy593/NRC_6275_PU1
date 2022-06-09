@@ -23,6 +23,8 @@ dataCitas = {}
                 Registro y autenticacion de usuarios
     -------------------------------------------------------
 """
+#Estado de inicio de sesion
+isLog = 0
 # ☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼ Autenticacion ☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼
 @app.route('/login')
 #contenedor para llamar a login.html
@@ -38,9 +40,11 @@ def iniciando():
         with open('dataClientes.json') as file:
             registrados = json.loads(file.read())
             for n in range(len(registrados)):   
-              print(registrados[n]['usuario'])
-            return redirect(url_for('index'))
-            
+                if l_usuario == registrados[n]['usuario'] and l_passwd == registrados[n]['contrasenia']:
+                    return redirect(url_for('index'))
+                else:
+                   pass
+            return redirect(url_for('f404'))
     else:
       return render_template('index.html')
 # ☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼
