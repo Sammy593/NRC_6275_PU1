@@ -8,28 +8,21 @@ app = Flask(__name__, template_folder='templates')
 @app.route('/')
 #contenedor para llamar a index.html
 def index():
-    return render_template('/index.html')
+    with open('dataClientes.json') as file:
+        registrados = json.loads(file.read())
+  #  print(registrados)
+    return render_template('/index.html', clientes = registrados)
 #----------------------- ************** ------------------
-""" -------------------------------------------------------
-                        Archivos json
-"""
-dataClientes = {}
-dataServicios = {}
-dataHorariosDisp = {}
-dataCitas = {}
-""" -------------------------------------------------------
-"""
+
 """ -------------------------------------------------------
                 Registro y autenticacion de usuarios
     -------------------------------------------------------
 """
-#Estado de inicio de sesion
-isLog = 0
 # ☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼ Autenticacion ☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼
 @app.route('/login')
 #contenedor para llamar a login.html
 def login():
-    return render_template('/login.html')
+      return render_template('/login.html')
 # Validacion de datos
 @app.route('/iniciando', methods =["GET", "POST"])
 def iniciando():
@@ -41,11 +34,15 @@ def iniciando():
             registrados = json.loads(file.read())
             for n in range(len(registrados)):   
                 if l_usuario == registrados[n]['usuario'] and l_passwd == registrados[n]['contrasenia']:
+                    estado = {'log':1}
+                    with open('isLog.json', 'w') as file:
+                       json.dump(estado, file)
                     return redirect(url_for('index'))
                 else:
                    pass
             return redirect(url_for('f404'))
     else:
+    
       return render_template('index.html')
 # ☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼☼
 
@@ -67,6 +64,14 @@ def registrando():
         correo = request.form.get('correo')
         usuario = request.form.get('usuario')
         contrasenia = request.form.get('contrasenia')
+
+        with open('dataClientes.json') as file:
+            registrados = json.loads(file.read())
+            for n in range(len(registrados)):   
+                if correo == registrados[n]['correo'] or usuario == registrados[n]['usuario']:
+                    return redirect(url_for('f404'))
+                else:
+                   pass
 
         dataClientes = {
             'id_cliente':id_cliente, 
@@ -92,6 +97,14 @@ def registrando():
                  *****************************
     -------------------------------------------------------
 """
+
+# ///////////// Informacion de servicios //////////////////
+@app.route('/info_1')
+def info_1():
+    return render_template('/info_1.html')
+
+# ////////////////////////////////////////////////////////
+
 @app.route('/f404')
 #contenedor para llamar a registro.html
 def f404():

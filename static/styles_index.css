@@ -142,10 +142,11 @@ main{
 }
 
 .servicio{
+  position: relative;
   margin: auto;
   width: 40%;
   height: 200px;
-  padding: 40px;
+  padding: 25px;
   display: flex;
   box-shadow: 0px 0px 4px rgb(77, 77, 77);
   flex-direction: column;
@@ -155,17 +156,22 @@ main{
   transition: all 0.6s;
 }
 .name_service{
-  padding-top: 10px;
-  font-size: 35px;
+  padding-top: 20px;
+  font-size: 23px;
   color: black;
-  text-align: center;
+  text-align:left;
 }
 
 .service_go{
+  position: absolute;
   text-align: end;
   text-decoration: none;
   color: rgb(24, 194, 194);
-  padding-top: 20px;
+  bottom: 50px;
+}
+.service_go:hover{
+  transform: translateX(30px);
+  transition: all 1s;
 }
   /* RESPONSIVE CSS
   -------------------------------------------------- */

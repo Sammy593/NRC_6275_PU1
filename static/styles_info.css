@@ -1,0 +1,13 @@
+.section1{
+    margin-top: 150px;
+}
+
+.section2_img{
+    margin-top: 150px;
+    place-content: center;
+}
+.section2_img img{
+    height: 90%;
+    width: 90%;
+    margin: auto;
+}
